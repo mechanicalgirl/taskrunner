@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <h3>Active Requests</h3>
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Email</th>
+      <th scope="col">Type</th>
+      <th scope="col">States</th>
+      <th scope="col">Deadline</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in requests %}
+      <tr>
+        <td>
+          {{ r['id'] }}
+        </td>
+        <td>
+          <a href="/user/{{ r['id'] }}">{{ r['email'] }}</a>
+        </td>
+        <td>
+            {{ r['request_type'] }}
+        </td>
+        <td>
+          {% for s in r['states'] %}
+            <img src="/static/{{ s }}_dot.png" alt="{{ s }}" title="{{ s }}" style="height: 10px; width: 10px;">
+          {% endfor %}
+        </td>
+        <td>
+          {% if r['deadline_date'] %}{{ r['deadline_date'] }}{% endif %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+  <br />
+  <a href="/completed/">Completed Requests</a>
+  <br />
+
+{% endblock %}

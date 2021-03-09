@@ -1,0 +1,12 @@
+Flask==1.1.1
+Flask-Bootstrap==3.3.7.1
+google-cloud-bigquery==1.15.0  ## for global utils
+google-cloud-storage==1.16.1   ## for global utils
+psycopg2==2.8.5
+PyYAML==5.3.1
+requests==2.24.0
+sentry_sdk==0.17.8
+SQLAlchemy==1.3.19
+SQLAlchemy-Utils==0.36.8
+statsd==3.3.0
+xlrd==2.0.1

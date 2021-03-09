@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col" width="50%"><h3>User Request</h3></th>
+      <th scope="col" width="50%"><h3>Tasks</h3></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        {% for key, value in user_request.items() %}
+          <b>{{ key }}:</b> {{ value }}<br>
+        {% endfor %}
+      </td>
+      <td>
+        <ul class="fa-ul">
+          {% for ti in task_instances %}
+            <li>
+              <h4>{{ ti.task.name }}</h4>
+              {% for key, value in ti.task_instance.items() %}
+                <b>{{ key }}:</b> {{ value }}<br>
+              {% endfor %}
+              {% if ti.task_instance.state != 'success' %}
+                <p>
+                <!-- <code>curl -X POST http://localhost:5004/taskrunner/task/{{ ti.task_instance.id }}</code> -->
+                <form name="submitform" method="post" action="http://localhost:5004/taskrunner/task/{{ ti.task_instance.id }}">
+                  <input type="submit" value="Run task instance {{ ti.task_instance.id }}">
+                </form>
+                <!-- <button onclick="location.href='/user/taskinstance/{{ ti.task_instance.id }}/user_request/{{ user_request.id }}'" type="button">
+                    Run {{ ti.task_instance.id }}</button> -->
+                </p>
+              {% endif %}
+              <br>
+            </li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+  </table>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+  
+{% block content %}
+
+  <h3>Add a new user request:</h3>
+
+  {% if form.errors %}{{ form.errors }}{% endif %}
+  <form action="/admin/addrequestform/" method="post">
+    {% for field in form %}
+      <div style="float: left; width: 150px; text-align: right; padding-right: 5px;">{{ field.label() }}</div>
+      <div>{{ field() }}</div>
+      <div style="clear: both;"</div>
+    {% endfor %}
+    <input type="submit" value="Submit">
+  </form>
+
+{% endblock %}

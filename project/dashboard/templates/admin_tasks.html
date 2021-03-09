@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <h3>Tasks</h3>
+  <table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">&nbsp;</th>
+      {% for key, value in tasks[0].items() %}
+        <th scope="col">{{ key }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for t in tasks %}
+      <tr>
+      <td><a href="/admin/edittask/{{ t.id }}">Edit</a></td>
+      {% for key, value in t.items() %}
+        <td>{{ value }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+  </table>
+
+{% endblock %}

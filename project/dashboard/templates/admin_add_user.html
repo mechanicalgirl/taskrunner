@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <h3>Upload a new JSON user request:</h3>
+
+  <form id="uploadrequest" enctype="multipart/form-data" method="post" action="http://localhost:5001/userrequest/">
+    <p><input id="fileupload" name="file" type="file" /></p>
+    <p><input type="submit" value="submit" id="submit" /></p>
+  </form>
+
+  <br><br>
+  <div>
+  Format: <a href="example.json" target="new">example.json</a>
+  </div>
+
+{% endblock %}

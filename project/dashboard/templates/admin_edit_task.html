@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+  <h3>Edit task:</h3>
+  {% if form.errors %}{{ form.errors }}{% endif %}
+  <form action="/admin/edittask/{{ task_id }}" method="POST">
+    {% for field in form %}
+      {{ field.label() }}  {{ field() }}<br>
+    {% endfor %}
+    <input type="submit" value="Submit">
+  </form>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{
+  "request_type": "Delete (or Data Extract) (REQUIRED)",
+  "email": "(REQUIRED)",
+  "request_date": "YYYY-MM-DD",
+  "request_due_date": "YYYY-MM-DD",
+  "userid": "",
+  "username": "",
+  "community": "",
+  "request_meta":
+  {
+    "name": "",
+    "request_id": "",
+    "ticket_id": "",
+    "geographic": {"city": "", "region_code": "", "country_code": "", "continent_code": ""},
+    "details": "(additional notes or the body of the request)",
+    "identifiers": {
+      "gdpr_identifier": "",
+      "ccpa_identifier": "",
+      "ccpa_do_not_sell_identifier": "",
+      "uuid": "",
+      "suid": "",
+      "permutive_id": "",
+      "ga_clientid": ""
+    }
+  }
+}

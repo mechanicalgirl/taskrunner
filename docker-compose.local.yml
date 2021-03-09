@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+  api:
+    image: privacy-request-api
+    build:
+      context: .
+      dockerfile: ./project/api/Dockerfile
+    container_name: api
+    ports:
+      - 5001:5000
+    command: python3 ./manage_api.py run -h 0.0.0.0
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - ENV=local
+      - APP_SETTINGS=project.api.settings.BaseConfig
+      - APP_SECRETS=./project/config/config.json
+    networks:
+      - dash_network
+
+  taskrunner:
+    image: privacy-request-taskrunner
+    build:
+      context: .
+      dockerfile: ./project/taskrunner/Dockerfile
+    container_name: taskrunner
+    ports:
+      - 5004:5000
+    command: python3 ./manage_task.py run -h 0.0.0.0
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - ENV=local
+      - APP_SETTINGS=project.taskrunner.settings.BaseConfig
+      - APP_SECRETS=./project/config/config.json
+      - CREDS_PATH=./project/taskrunner/tasks/creds/
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:5.0.7-alpine
+    ports:
+      - 6379:6379
+
+  workers:
+    image: privacy-request-taskrunner
+    command: python3 ./manage_task.py run_worker
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - ENV=local
+      - APP_SETTINGS=project.taskrunner.settings.BaseConfig
+      - APP_SECRETS=./project/config/config.json
+      - CREDS_PATH=./project/taskrunner/tasks/creds/
+    depends_on:
+      - redis
+
+  dashboard:
+    image: privacy-request-dashboard
+    build:
+      context: .
+      dockerfile: ./project/dashboard/Dockerfile
+    container_name: dashboard
+    ports:
+      - 5002:5000
+    command: python3 ./manage_dash.py run -h 0.0.0.0
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - ENV=local
+      - APP_SECRETS=./project/config/config.json
+      - APP_SETTINGS=project.dashboard.settings.BaseConfig
+    networks:
+      - dash_network
+
+networks:
+  dash_network:
+    external: false

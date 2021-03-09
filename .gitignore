@@ -1,3 +1,17 @@
+creds_gke.json
+creds_privacy.json
+deploy/*
+project/config/config.json
+project/api/creds/*
+project/taskrunner/tasks/creds/*
+
+project/api/import.py
+project/api/sheets.py
+project/taskrunner/tasks/phonograph_extract.py
+project/taskrunner/tasks/phonograph_delete.py
+project/taskrunner/tasks/ga_delete.py
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
